@@ -6,8 +6,14 @@
       <input type="text" class="form-control" [(ngModel)]="userName" name="userName" />
       <label>Password</label>
       <input type="password" class="form-control" [(ngModel)]="password" name="password" />
+      <label *ngIf="Manager">Tavern</label>
+      <input type="text" class="form-control" *ngIf="Manager" name="Tavern" />
     </div>
-    <div class="col-md-6"></div>
+  </div>
+  <div class="row">
+  
+    <input type="radio" [(ngModel)]="Admin" style="margin-top: 10px;" name="Admin">Admin
+    <input type="radio" [(ngModel)]="Manager" style="margin-top: 10px;" name="Manager">Manager
   </div>
   <br />
   <div class="row">
