@@ -12,16 +12,13 @@ export class SignUpComponent {
     constructor(private router: Router, private authService: AuthService) {}
 
     signUp(): void {
-        this.authService.login(this.userName, this.password).subscribe(
-            (response) => {
-                if (response.success) {
-                    console.log('successful login');
-                    this.router.navigateByUrl('/home');
-                }
-            },
-            (error) => {
-                console.log('username/password incorrect');
-            },
-        );
+        
+        console.log(this.userName);
+        console.log(this.password);
     }
+
+    cancel(): void{
+        this.router.navigateByUrl('/login');
+    }
+
 }

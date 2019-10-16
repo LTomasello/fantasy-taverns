@@ -28,4 +28,8 @@ export class AppComponent implements OnInit {
     this.router.navigateByUrl('/login');
   }
 
+  SignUp(): void{
+    this.router.navigateByUrl('/SignUp');
+  }
+
 }
