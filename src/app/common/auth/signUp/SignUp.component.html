@@ -6,14 +6,35 @@
       <input type="text" class="form-control" [(ngModel)]="userName" name="userName" />
       <label>Password</label>
       <input type="password" class="form-control" [(ngModel)]="password" name="password" />
-      <label *ngIf="Manager">Tavern</label>
-      <input type="text" class="form-control" *ngIf="Manager" name="Tavern" />
-    </div>
-  </div>
-  <div class="row">
+    
   
-    <input type="radio" [(ngModel)]="Admin" style="margin-top: 10px;" name="Admin">Admin
-    <input type="radio" [(ngModel)]="Manager" style="margin-top: 10px;" name="Manager">Manager
+        <div class="btn-group btn-group-toggle"
+            ngbRadioGroup
+            [(ngModel)]="role"
+            name="role">
+              <label ngbButtonLabel class="btn-primary">
+                  <input ngbButton type="radio" value="Admin" />
+                  Admin
+              </label>
+              <label ngbButtonLabel class="btn-primary">
+                  <input ngbButton type="radio" value="Manager" />
+                  Manager
+              </label>
+        </div>
+
+        <div *ngIf="role === 'Admin'">
+          <label>Tavern</label>
+          <input type="text" class="form-control" [(ngModel)]="TavernName" name="TavernName" />
+        </div>
+        <div *ngIf="role === 'Manager'">
+          <label>Select Your Tavern</label>
+          <select class="form-control" [(ngModel)]="selectTavern" name="selectTavern">
+              <option *ngFor="let tavern of taverns" [ngValue]="tavern">{{tavern.tavernName}}</option>
+          </select>   
+        </div>
+
+
+    </div>
   </div>
   <br />
   <div class="row">
@@ -29,3 +50,4 @@
     </div>
   </div>
 </form>
+
