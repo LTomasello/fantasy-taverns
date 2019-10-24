@@ -20,7 +20,7 @@ export class SignUpComponent {
 
         this.tavernService.getTaverns().subscribe(
             (Response) => {
-                console.log(Response);
+                console.log(Response, "Response here");
                 this.taverns = Response;
             },
             (error) => {
@@ -31,43 +31,40 @@ export class SignUpComponent {
     }
 
     signUp(): void {
-        // work from class
-        /*const user = {userName: 'ltomasello2462@gmail.com', password: 'cloud7'};
-            this.authService.create(user).subscribe((answer) => {
-                this.router.navigateByUrl('/login')
         
-        });*/
 
         let user: {};
-
-        if (this.role === 'admin'){
+        console.log('role:', this.role, "role call");
+        if (this.role === 'Admin'){
             user = {
                 UserName: this.userName,
                 Password: this.password,
                 Tavern: {
                     ID: 0,
-                    tavernName: this.tavernName
+                    TavernName: this.tavernName
                 }
+                
             }
+            console.log(user, "Admin call");
         }
-        else if (this.role = 'manager') {
+        else if (this.role = 'Manager') {
             user = {
                 UserName: this.userName,
                 Password: this.password,
                 Tavern: this.selectTavern
             }
         }
-        console.log(this.userName, this.password, this.tavernName);
+        console.log(user, "Manager Call");
+        
+        this.authService.create(user).subscribe((answer) => {
+            this.router.navigateByUrl('/taverns');
+        });
 
     }
     
     
     cancel(): void{
         this.router.navigateByUrl('/login');
-    }
-
-    roleValue() {
-        console.log('ngModel value', this.role );
     }
 
 }

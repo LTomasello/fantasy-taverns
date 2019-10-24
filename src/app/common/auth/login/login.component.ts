@@ -12,16 +12,17 @@ export class LoginComponent {
     constructor(private router: Router, private authService: AuthService) {}
 
     login(): void {
-        this.authService.login(this.userName, this.password).subscribe(
+         this.authService.login(this.userName, this.password).subscribe(
             (response) => {
                 if (response.success) {
                     console.log('successful login');
-                    this.router.navigateByUrl('/home');
+                    this.router.navigateByUrl('/taverns');
                 }
             },
             (error) => {
                 console.log('username/password incorrect');
             },
-        );
+     
+        ); 
     }
 }
