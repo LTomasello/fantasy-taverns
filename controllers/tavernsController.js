@@ -5,44 +5,82 @@ const { poolPromise } = require('../data/db');
 const jwt = require('jsonwebtoken');
 
 
-const getAllTaverns = async function(req) {
+const getAllTaverns = async function(req, res) {
+    res.setHeader('ContentType', 'application/json');
+    let taverns;
+    
+    
     const pool = await poolPromise;
-    let result;
     
 
     try {
-        result = await pool
+        taverns = await pool
             .request()
-            .input('UserID', sql.Int, req.user.ID)
             .query(
-                'SELECT * FROM Taverns WHERE ID = @UserID',
+                'SELECT TavernName, ID FROM Taverns ',
             );
-    } catch (e) {
-        throwError(e.message);
+        taverns = taverns.recordset;
+    } catch (error) {
+        returnError(res, error, 500);
     }
 
-    return result.recordset;
+    returnSuccessResponse(res, taverns)
 };
 
-
-getAll = async function(req, res) {
-    // format request
-    res.setHeader('ContentType', 'application/json');
-  
+module.exports.getAllTaverns = getAllTaverns;
 
 
-   
-    let err, taverns;
+const getMyTaverns = async function(req, res) {
+    res.setHeader('ContentType', 'application/json')
 
-    // now call the DB
+    let myTaverns;
+    console.log(req.user, "myTaverns req");
 
-    [err, taverns] = await executeOrThrow(getAllTaverns(req));
-    if (err) {
-        return returnError(res, err, 422);
+    const pool = await poolPromise;
+
+    try {
+        myTaverns = await pool
+            .request()
+            .input('tavernID', sql.VarChar, req.user.TavernID)
+            .query(
+                'SELECT * FROM Taverns WHERE ID = @tavernID'
+            );
+        myTaverns = myTaverns.recordset.shift();
+        
+    } catch (error) {
+        returnError(res, error, 500);
     }
-    // return results
 
-    return returnSuccessResponse(res, taverns, 201);
-};
+    returnSuccessResponse(res, myTaverns)
+}
 
-module.exports.getAll = getAll;
+module.exports.getMyTaverns = getMyTaverns;
+
+const getTavernRooms = async function(req, res) {
+    res.setHeader('ContentType', 'application/json')
+
+    let tavernRooms;
+    
+    const pool = await poolPromise;
+
+    try {
+        tavernRooms = await pool
+            .request()
+            .input('tavernID', sql.VarChar, req.user.TavernID)
+            .query(
+                'SELECT * FROM Rooms WHERE TavernID = @tavernID'
+            );
+        tavernRooms = tavernRooms.recordset;
+        
+    } catch (error) {
+        returnError(res, error, 500);
+    }
+
+    returnSuccessResponse(res, tavernRooms)
+}
+
+module.exports.getTavernRooms = getTavernRooms;
+
+
+
+

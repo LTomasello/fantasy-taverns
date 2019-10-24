@@ -1,25 +1,41 @@
 import { Component, OnInit } from "@angular/core";
-import { TavernService, ITavern } from '../../tavern.service';
+import { TavernService, ITavern, IRooms } from '../../tavern.service';
 
 
 @Component({
+    selector: 'app-my-taverns',
     templateUrl: './my-taverns.component.html'
 
 })
 export class myTavernsComponent implements OnInit {
 
-    taverns: ITavern[];
+    myTaverns: ITavern;
+    tavernRooms: IRooms[];
 
     constructor(private tavernService: TavernService) {}
 
     
 
 
-    ngOnInit(): void {
-        this.tavernService.getAll().subscribe((taverns)=>{
-             this.taverns = taverns;
-            console.log(taverns, "Taverns Here");
+    ngOnInit() {
+        this.tavernService.getMyTaverns().subscribe(
+        (response)=>{
+             this.myTaverns = response;
+            console.log(response, "Taverns Here");
+        },
+        (error) => {
+            console.log(error);
         })
         
+        this.tavernService.getTavernRooms().subscribe(
+            (Response)=>{
+                this.tavernRooms = Response;
+                console.log(Response, "Rooms Here")
+            },
+            (error) => {
+                console.log(error, "rooms error")
+            }
+        )
     }
 }
+

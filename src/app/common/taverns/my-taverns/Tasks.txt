@@ -1,18 +1,18 @@
-Build out back end TavernsController to be able to get all taverns and add a route to the app.js
-    - Find out what he means by TavernsController XP
-    - Add TavernsController
+Build out back end TavernsController to be able to get all taverns and add a route to the app.js (DONE)
+    - Find out what he means by TavernsController (DONE)
+    - Add TavernsController (DONE)
     - find out what refactor means in codeing (DONE)
         - Code refactoring is the process of restructuring existing computer code—changing the 
         factoring—without changing its external behavior. Refactoring is intended to improve nonfunctional
         attributes of the software.
-    - make a route from the back end to taverns service 
-    - test to see that the database is called 
+    - make a route from the back end to taverns service (DONE)
+    - test to see that the database is called (DONE)
 
 Build My-Tavern page
     - create tavern's module (DONE)
-    - make html page path = '/my-tavern'\
-    - create a taverns component
-        - list of taverns
+    - make html page path = '/my-tavern'\ (DONE)
+    - create a taverns component (DONE)
+        - list of taverns (DONE)
         - new rooms button
         - edit tavern button
     - create a taverns service (DONE)
@@ -23,3 +23,9 @@ Build My-Tavern page
         - display the room listings
             - room name + daily rate
         - on login go to tavern page (Works with Manager but not with Admin)
+
+Questions to research
+    - shift()
+    - void
+    - recordset (where is that?) node mssql
+    - Where does my login information go after i use it?

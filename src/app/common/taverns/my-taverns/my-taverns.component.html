@@ -1,6 +1,10 @@
 <h2>My Taverns</h2>
+<br>
+
     <div>
-        <ul>
-            <li *ngFor="let tavern of taverns">{{ tavern.TavernName }}</li>
-        </ul>
+      <h4 *ngIf = "myTaverns">{{ myTaverns.TavernName }}</h4> 
     </div>
+    <i style="text-indent: 12px" >Rooms</i>
+    <ul>
+         <option *ngFor = "let rooms of tavernRooms">{{rooms.RoomName}}</option>
+    </ul>

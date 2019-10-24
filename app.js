@@ -70,27 +70,9 @@ app.use((req, res, next) => {
 app.post('/users', userController.create);
 app.post('/login', userController.login);
 
-app.get('/tavernList', (async function(req, res) {
-    let taverns;
-
-    const pool = await poolPromise;
-
-    try {
-        taverns = await pool
-            .request()
-            .query('SELECT TavernName, ID FROM Taverns');
-        taverns = taverns.recordset;
-    }
-    catch (error) {
-        returnError(res, error, 500);
-    }
-
-    returnSuccessResponse(res, taverns);
-}));
-
-
-
-app.get('/taverns', passport.authenticate('jwt', {session: false}), tavernsController.getAll);
+app.get('/tavernList', tavernsController.getAllTaverns);
+app.get('/my-taverns', passport.authenticate('jwt', {session: false}), tavernsController.getMyTaverns);
+app.get('/tavern-rooms', passport.authenticate('jwt', {session: false}), tavernsController.getTavernRooms);
 
 console.log('SERVER READY');
 module.exports = app;

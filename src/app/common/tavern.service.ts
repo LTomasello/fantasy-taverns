@@ -3,8 +3,17 @@ import { HttpClient } from "@angular/common/http";
 import { Observable } from "rxjs";
 
 export interface ITavern {
-    id: number;
-    Name: string;
+    ID: number,
+    TavernName: string,
+}
+
+export interface IRooms {
+    ID: number,
+    TavernID: number,
+    RoomName: string,
+    RoomStatus: string,
+    DailyRate: string
+
 }
 
 @Injectable({
@@ -14,12 +23,16 @@ export interface ITavern {
 export class TavernService {
     constructor(private http: HttpClient) { }
 
-    getTaverns(): Observable<any> {
-        return this.http.get('http://localhost:3000/tavernList');
+    getAllTaverns(): Observable<any> {
+        return this.http.get<any>('http://localhost:3000/tavernList');
     }
 
-    getAll(): Observable<ITavern[]> { 
-        return this.http.get<ITavern[]>('http://localhost:3000/taverns');
+    getMyTaverns(): Observable<ITavern> { 
+        return this.http.get<ITavern>('http://localhost:3000/my-taverns');
+    }
+
+    getTavernRooms(): Observable<IRooms[]> {
+        return this.http.get<IRooms[]>('http://localhost:3000/tavern-rooms');
     }
 }
 

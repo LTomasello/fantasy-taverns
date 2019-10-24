@@ -18,7 +18,7 @@ export class SignUpComponent {
 
     constructor(private router: Router, private authService: AuthService, private tavernService: TavernService) {
 
-        this.tavernService.getTaverns().subscribe(
+        this.tavernService.getAllTaverns().subscribe(
             (Response) => {
                 console.log(Response, "Response here");
                 this.taverns = Response;
@@ -57,7 +57,7 @@ export class SignUpComponent {
         console.log(user, "Manager Call");
         
         this.authService.create(user).subscribe((answer) => {
-            this.router.navigateByUrl('/taverns');
+             this.router.navigateByUrl('/login');
         });
 
     }
