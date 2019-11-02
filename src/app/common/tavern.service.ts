@@ -34,6 +34,10 @@ export class TavernService {
     getTavernRooms(): Observable<IRooms[]> {
         return this.http.get<IRooms[]>('http://localhost:3000/tavern-rooms');
     }
+
+    addRoom(room: IRooms): Observable<IRooms> {
+        return this.http.post<IRooms> ('http://localhost:3000/rooms', room);
+    }
 }
 
 

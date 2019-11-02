@@ -3,14 +3,18 @@ import { Component, OnInit } from "@angular/core";
 
 
 @Component({
-    templateUrl: './rooms.component.html'
+    templateUrl: './insertRooms.component.html'
 
 })
-export class roomsComponent implements OnInit {
+export class InsertRoomsComponent implements OnInit {
     constructor() {}
 
    // taverns = TavernService;
 
 
     ngOnInit(): void {}
+
+    saveRoom(): void {
+
+    };
 }
