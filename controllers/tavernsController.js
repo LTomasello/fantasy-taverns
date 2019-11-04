@@ -56,7 +56,7 @@ const getMyTaverns = async function(req, res) {
 
 module.exports.getMyTaverns = getMyTaverns;
 
-const getTavernRooms = async function(req, res) {
+getTavernRooms = async function(req, res) {
     res.setHeader('ContentType', 'application/json')
 
     let tavernRooms;
@@ -66,9 +66,10 @@ const getTavernRooms = async function(req, res) {
     try {
         tavernRooms = await pool
             .request()
-            .input('tavernID', sql.VarChar, req.user.TavernID)
+            .input('RoomName', sql.VarChar, req.query.RoomName)
+            .input('tavernID', sql.Int, req.user.TavernID)
             .query(
-                'SELECT * FROM Rooms WHERE TavernID = @tavernID'
+                'SELECT * FROM Rooms WHERE TavernID = @TavernID and RoomName LIKE '%' + @RoomName + '%'', 
             );
         tavernRooms = tavernRooms.recordset;
         
@@ -81,6 +82,33 @@ const getTavernRooms = async function(req, res) {
 
 module.exports.getTavernRooms = getTavernRooms;
 
+const insert = async function(req, res) {
+    res.setHeader('ContentType', 'application/json');
+    const body = req.body;
 
+    if (!body.RoomName) {
+        return returnError(res, 'Please enter a name', 422);
+    }
+    const pool = await poolPromise;
+    
+    try {
+        room = await pool
+            .request()
+            .input('RoomName', sql.VarChar, body.RoomName)
+            .input('DailyRate', sql.Int, 2)
+            .input('RoomStatus', sql.VarChar, 0)
+            .input('tavernID', sql.int, req.user.TavernID)
+            .query(
+                'INSERT INTO Rooms ([RoomName], [DailyRate], [RoomStatus], [TavernID]) OUTPUT inserted.* values (@RoomName, @DailyRate, @RoomStatus, @tavernID)',
+            );
+        room = room.recordset.shift();
+    } catch (e) {
+        returnError(res, e, 500);
+    }
+
+    return returnSuccessResponse(res, room, 201);
+};
+
+module.exports.insert = insert;
 
 

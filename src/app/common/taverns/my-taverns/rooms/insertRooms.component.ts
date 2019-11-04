@@ -1,5 +1,7 @@
 import { Component, OnInit } from "@angular/core";
-//import { TavernService } from '../../tavern.service';
+import { TavernService } from '../../../tavern.service';
+import { NgForm } from '@angular/forms';
+import { Router } from '@angular/router';
 
 
 @Component({
@@ -7,14 +9,18 @@ import { Component, OnInit } from "@angular/core";
 
 })
 export class InsertRoomsComponent implements OnInit {
-    constructor() {}
+    constructor(private tavernService: TavernService, private router: Router) {}
 
    // taverns = TavernService;
 
 
     ngOnInit(): void {}
 
-    saveRoom(): void {
-
+    saveRoom(roomForm: NgForm): void {
+        if(roomForm.valid) {
+            this.tavernService.addRoom(roomForm.value).subscribe((answer) => {
+                this.router.navigateByUrl('/taverns');
+            });
+        }
     };
 }

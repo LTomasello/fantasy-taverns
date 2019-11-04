@@ -8,6 +8,13 @@
     <ul>
          <option *ngFor = "let rooms of tavernRooms">{{rooms.RoomName}}</option>
     </ul>
+    <div class="row form-group">
+      <div class="col-md-8">
+          <label for="search">Search:</label>
+          <input class="form-control" id="search" (keyup)="search($event)" [(ngModel)]="searchText" name="search"
+              placeholder="Enter text to search..." autocomplete="off">
+      </div>
     <div>
       <button type="submit" class="btn btn-primary" routerLink="/taverns/insert-rooms">Insert Rooms</button>
     </div>
+  

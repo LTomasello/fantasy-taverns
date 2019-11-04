@@ -7,7 +7,7 @@ import { InsertRoomsComponent } from './my-taverns/rooms/insertRooms.component';
 
 const tavernRoutes: Routes = [
     { path: 'taverns', component: myTavernsComponent, canActivate: [AuthGuard] },
-    { path: 'taverns/insert-rooms', component: InsertRoomsComponent},
+    { path: 'taverns/insert-rooms', component: InsertRoomsComponent, canActivate: [AuthGuard]},
 ];
 
 
