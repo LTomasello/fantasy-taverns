@@ -13,16 +13,39 @@ Build My-Tavern page
     - make html page path = '/my-tavern'\ (DONE)
     - create a taverns component (DONE)
         - list of taverns (DONE)
-        - new rooms button
+        - new rooms button (DONE)
         - edit tavern button
     - create a taverns service (DONE)
     - create a taverns route (DONE)
-    - use currently logged in users tavern Id
-        - create a call for taverns where users are logged in
-        - display the tavern name
-        - display the room listings
-            - room name + daily rate
-        - on login go to tavern page (Works with Manager but not with Admin)
+    - use currently logged in users tavern Id (DONE)
+        - create a call for taverns where users are logged in (DONE)
+        - display the tavern name (DONE)
+        - display the room listings (DONE)
+            - room name + daily rate (DONE)
+        - on login go to tavern page (DONE)
+    - edit rooms from
+        - create a form that appears when you click on the room
+        - form should have a text box that edits room name and daily rate
+            - hint: param maps and <router outlet>
+
+    - insert rooms button
+        - create a button that links to Insert Rooms page (DONE)
+        - Insert button should only show if the user is a Manager, not a Admin
+    - search bar
+        - create a search bar that reduces rooms (DONE)
+
+Insert Rooms page
+    - Insert rooms should have a form to insert a room to the DB (DONE)
+    - Insert Rooms should also insert a Daily Rate for that Room 
+
+Book A Stay page
+    - Create a page that lets a Guest book a stay 
+    - page should have a drop down for Guests ID and Name 
+    - Should have a form to select the date 
+    - Create a drop down for the rooms and their daily rate
+        - order by most expensive to least expensive
+    - submit button 
+        - submit should console log all the inputs
 
 Questions to research
     - shift()

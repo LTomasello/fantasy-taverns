@@ -1,13 +1,20 @@
 <h2>My Taverns</h2>
 <br>
 
-    <div>
+  
       <h4 *ngIf = "myTaverns">{{ myTaverns.TavernName }}</h4> 
+
+    <div>
+      <i style="text-indent: 12px" ><a routerLink="/taverns">Rooms</a></i>
     </div>
-    <i style="text-indent: 12px" >Rooms</i>
-    <ul>
-         <option *ngFor = "let rooms of tavernRooms">{{rooms.RoomName}}</option>
-    </ul>
+    <div class="row">
+      <ul>
+           <option *ngFor = "let rooms of tavernRooms" [routerLink]="['/taverns', room]">{{rooms.RoomName}}</option>
+      </ul>
+      <ul style="float: right">
+        <option *ngFor = "let rooms of tavernRooms">{{rooms.DailyRate}}</option>
+      </ul>
+    </div>
     <div class="row form-group">
       <div class="col-md-8">
           <label for="search">Search:</label>

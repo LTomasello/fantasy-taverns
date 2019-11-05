@@ -1,0 +1,21 @@
+<form #form="ngForm" (submit)="editRoom(form)">
+    <div class="row">
+        <div class="col-md-6">
+            <label for="RoomName">Room Name</label>
+            <input required type="text" class="form-control" name="RoomName" ngModel #RoomName="ngModel">
+            <div *ngIf="RoomName.invalid && (RoomName.dirty || RoomName.touched)" class="alert alert-danger">
+              <div *ngIf="RoomName.errors.required">
+                Room Name is required.
+              </div>
+            </div>
+            <label for="dailyRate">Daily Rate</label>
+            <input required type="text" class="form-control" name="dailyRate" ngModel #dailyRate="ngModel">
+            <div *ngIf="dailyRate.invalid && (dailyRate.dirty || dailyRate.touched)" class="alert alert-danger">
+              <div *ngIf="dailyRate.errors.required">
+                Daily Rate is required.
+              </div>
+            </div>
+        </div>
+    </div>
+    <button type="submit" class="btn btn-primary">Save</button>
+</form>   

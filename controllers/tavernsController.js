@@ -69,7 +69,7 @@ getTavernRooms = async function(req, res) {
             .input('RoomName', sql.VarChar, req.query.RoomName)
             .input('tavernID', sql.Int, req.user.TavernID)
             .query(
-                'SELECT * FROM Rooms WHERE TavernID = @TavernID and RoomName LIKE '%' + @RoomName + '%'', 
+                `SELECT * FROM Rooms WHERE TavernID = @TavernID and RoomName LIKE '%' + @RoomName + '%'`, 
             );
         tavernRooms = tavernRooms.recordset;
         
@@ -96,8 +96,8 @@ const insert = async function(req, res) {
             .request()
             .input('RoomName', sql.VarChar, body.RoomName)
             .input('DailyRate', sql.Int, 2)
-            .input('RoomStatus', sql.VarChar, 0)
-            .input('tavernID', sql.int, req.user.TavernID)
+            .input('RoomStatus', sql.Int, 0)
+            .input('tavernID', sql.Int, req.user.TavernID)
             .query(
                 'INSERT INTO Rooms ([RoomName], [DailyRate], [RoomStatus], [TavernID]) OUTPUT inserted.* values (@RoomName, @DailyRate, @RoomStatus, @tavernID)',
             );

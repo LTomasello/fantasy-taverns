@@ -43,15 +43,8 @@ export class myTavernsComponent implements OnInit, OnDestroy {
 
         this.searchRooms('');
         
-       /* this.tavernService.getTavernRooms().subscribe(
-            (Response)=>{
-                this.tavernRooms = Response;
-                console.log(Response, "Rooms Here")
-            },
-            (error) => {
-                console.log(error, "rooms error")
-            }
-        ) */
+       
+ 
     }
 
     searchRooms(newValue: string): void {
