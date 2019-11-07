@@ -1,21 +1,34 @@
-<form #form="ngForm" (submit)="editRoom(form)">
-    <div class="row">
+<form [formGroup]="fg" (ngSubmit)="editRoom()">
+    <div class="form-group">
         <div class="col-md-6">
-            <label for="RoomName">Room Name</label>
-            <input required type="text" class="form-control" name="RoomName" ngModel #RoomName="ngModel">
-            <div *ngIf="RoomName.invalid && (RoomName.dirty || RoomName.touched)" class="alert alert-danger">
-              <div *ngIf="RoomName.errors.required">
+            <label class="control-label" for="roomName">Room Name</label>
+            <input type="text" class="form-control" formControlName="roomName">
+            <div *ngIf="roomName.invalid && (roomName.dirty || roomName.touched)" class="alert alert-danger">
+              <div *ngIf="roomName.errors.required">
                 Room Name is required.
-              </div>
-            </div>
-            <label for="dailyRate">Daily Rate</label>
-            <input required type="text" class="form-control" name="dailyRate" ngModel #dailyRate="ngModel">
-            <div *ngIf="dailyRate.invalid && (dailyRate.dirty || dailyRate.touched)" class="alert alert-danger">
-              <div *ngIf="dailyRate.errors.required">
-                Daily Rate is required.
               </div>
             </div>
         </div>
     </div>
-    <button type="submit" class="btn btn-primary">Save</button>
+    <div class="form-group">
+      <div class="col-md-6">
+          <label for="dailyRate" class="control-label">Daily Rate</label>
+          <input type="number" class="form-control" formControlName="dailyRate">
+          <div *ngIf="dailyRate.invalid && (dailyRate.dirty || dailyRate.touched)" class="alert alert-danger">
+            <div *ngIf="dailyRate.errors.required">
+              Daily Rate is required.
+            </div>
+          </div>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-md-1">
+          <button type="submit" class="btn btn-primary">Save</button>
+      </div>
+      <div class="col-md-1">
+          <button type="button" class="btn btn-secondary" (click)="cancel()">Cancel</button>
+      </div>
+     
+    </div>
+    
 </form>   

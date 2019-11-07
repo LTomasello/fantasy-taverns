@@ -24,7 +24,7 @@ Build My-Tavern page
             - room name + daily rate (DONE)
         - on login go to tavern page (DONE)
     - edit rooms from
-        - create a form that appears when you click on the room
+        - create a form that appears when you click on the room (DONE)
         - form should have a text box that edits room name and daily rate
             - hint: param maps and <router outlet>
 

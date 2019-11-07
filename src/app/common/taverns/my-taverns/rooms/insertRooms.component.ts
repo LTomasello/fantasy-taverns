@@ -18,7 +18,7 @@ export class InsertRoomsComponent implements OnInit {
 
     saveRoom(roomForm: NgForm): void {
         if(roomForm.valid) {
-            this.tavernService.addRoom(roomForm.value).subscribe((answer) => {
+            this.tavernService.save(roomForm.value).subscribe((answer) => {
                 this.router.navigateByUrl('/taverns');
             });
         }

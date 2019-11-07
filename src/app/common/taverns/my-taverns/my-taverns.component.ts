@@ -24,7 +24,7 @@ export class myTavernsComponent implements OnInit, OnDestroy {
                 distinctUntilChanged(),
             )
             .subscribe((newValue) => {
-                this.searchRooms(newValue);
+                this.tavernService.getTavernRooms(newValue).subscribe((tavernRooms) => (this.tavernRooms = tavernRooms));
             })
     }
 
@@ -41,17 +41,17 @@ export class myTavernsComponent implements OnInit, OnDestroy {
             console.log(error);
         })
 
-        this.searchRooms('');
+        this.tavernService.getTavernRooms('').subscribe((tavernRooms) => (this.tavernRooms = tavernRooms));
         
        
  
     }
 
-    searchRooms(newValue: string): void {
-        this.tavernService.getTavernRooms(newValue).subscribe((rooms) => {
-            this.tavernRooms = rooms;
-        })
+    trackById(index: number, item: IRooms) {
+        return item.ID;
     }
+
+  
 
     search($event): void {
         this.searchUpdated.next($event.target.value);

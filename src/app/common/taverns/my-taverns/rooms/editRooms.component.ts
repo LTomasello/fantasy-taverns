@@ -1,5 +1,7 @@
 import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute, ParamMap } from '@angular/router';
+import { ActivatedRoute, ParamMap, Router } from '@angular/router';
+import { TavernService, IRooms } from '../../../tavern.service';
+import { NgForm, FormGroup, FormBuilder, Validators } from '@angular/forms';
 
 
 
@@ -8,19 +10,64 @@ import { ActivatedRoute, ParamMap } from '@angular/router';
   templateUrl: './editRooms.component.html'
 })
 export class editRoomsComponent implements OnInit {
-  room: string;
+  room: IRooms;
+  private sub: any;
+  fg: FormGroup;
 
-  constructor(private route: ActivatedRoute) {}
+  constructor(private route: ActivatedRoute, private tavernService: TavernService, private router: Router, private formBuilder: FormBuilder) {}
+
+
+  cancel(): void {
+    this.router.navigateByUrl('/taverns');
+  }
+
+  editRoom() {
+    this.room.RoomName = this.fg.value.roomName;
+    this.room.DailyRate = this.fg.value.dailyRate;
+
+    this.tavernService.save(this.room).subscribe(
+          (response) => {
+            if (response.success) {
+                this.router.navigateByUrl('/taverns');
+                
+            }
+          },
+          (error) => {
+            console.log('update failed')
+          },
+    );
+  }
+
 
   ngOnInit() {
-    // snapshot way
-   // console.log('thing', this.route.snapshot.params.room);
 
-    // observable way
-    this.route.paramMap.subscribe(params => {
-      console.log(params.get('room'));
-      this.room = params.get('room');
-    });
+    this.fg = this.formBuilder.group({
+      roomName: ['', Validators.required],
+      dailyRate: ['', Validators.required]
+    })
+
+   
+    this. sub = this.route.paramMap.subscribe(params => {
+              if (params['id'] != undefined) {
+                  let id = params['id'];
+                  this.tavernService.getRoom(id).subscribe(rooms => {
+                      this.room = rooms;
+                      this.fg.controls['roomName'].setValue(this.room.RoomName);
+                      this.fg.controls['dailyRate'].setValue(this.room.DailyRate);
+                  });
+                } else {
+                      this.room = <IRooms>{};
+                      this.room.ID = 0;
+                }
+              });
+    
+  }
+
+  get roomName() { return this.fg.get('roomName'); }
+  get dailyRate() { return this.fg.get('dailyRate'); }
+
+  ngOnDestroy() {
+    this.sub.unsubscribe();
   }
 
 }

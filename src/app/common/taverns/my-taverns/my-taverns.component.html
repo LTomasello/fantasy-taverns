@@ -5,11 +5,11 @@
       <h4 *ngIf = "myTaverns">{{ myTaverns.TavernName }}</h4> 
 
     <div>
-      <i style="text-indent: 12px" ><a routerLink="/taverns">Rooms</a></i>
+      <i style="text-indent: 12px" >Rooms</i>
     </div>
     <div class="row">
       <ul>
-           <option *ngFor = "let rooms of tavernRooms" [routerLink]="['/taverns', room]">{{rooms.RoomName}}</option>
+           <option *ngFor = "let rooms of tavernRooms; trackBy: trackById" [routerLink]="['rooms', rooms.ID]">{{rooms.RoomName}}</option>
       </ul>
       <ul style="float: right">
         <option *ngFor = "let rooms of tavernRooms">{{rooms.DailyRate}}</option>

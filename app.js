@@ -73,7 +73,10 @@ app.post('/login', userController.login);
 app.get('/tavernList', tavernsController.getAllTaverns);
 app.get('/my-taverns', passport.authenticate('jwt', {session: false}), tavernsController.getMyTaverns);
 app.get('/tavern-rooms', passport.authenticate('jwt', {session: false}), tavernsController.getTavernRooms);
-app.post('/tavern-rooms', passport.authenticate('jwt', {session: false}), tavernsController.insert);
+app.get('taverns/rooms/:id', passport.authenticate('jwt', {session: false}), tavernsController.getRoom)
+app.post('/insert-rooms', passport.authenticate('jwt', {session: false}), tavernsController.insert);
+app.post('/edit-rooms', passport.authenticate('jwt', {session: false}), tavernsController.editRoom);
+app.post('/insert-rooms', passport.authenticate('jwt', {session: false}), tavernsController.save);
 
 console.log('SERVER READY');
 module.exports = app;

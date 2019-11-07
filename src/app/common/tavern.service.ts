@@ -8,6 +8,7 @@ export interface ITavern {
 }
 
 export interface IRooms {
+  success: any;
     ID: number,
     TavernID: number,
     RoomName: string,
@@ -35,9 +36,22 @@ export class TavernService {
         return this.http.get<IRooms[]>(`http://localhost:3000/tavern-rooms?RoomName=${RoomName}`);
     }
 
-    addRoom(room: IRooms): Observable<IRooms> {
-        return this.http.post<IRooms> ('http://localhost:3000/tavern-rooms', room);
+    getRoom(id: string): Observable<IRooms> {
+        return this.http.get<IRooms>('http://localhost:3000/taverns/rooms/' + id)
     }
+
+    addRoom(room: IRooms): Observable<IRooms> {
+        return this.http.post<IRooms> ('http://localhost:3000/insert-rooms', room);
+    }
+    
+    editRoom(data: IRooms): Observable<IRooms> {
+        return this.http.post<IRooms> ('http://localhost:3000/edit-rooms', data);
+    }
+
+    save(data: IRooms): Observable<IRooms> {
+        return this.http.post<IRooms> ('http://localhost:3000/insert-rooms', data);
+    }
+    
 }
 
 

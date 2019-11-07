@@ -8,10 +8,10 @@ import { editRoomsComponent } from './my-taverns/rooms/editRooms.component';
 
 
 const tavernRoutes: Routes = [
-    { path: 'taverns', component: myTavernsComponent, canActivate: [AuthGuard] },
-    { path: 'taverns/insert-rooms', component: InsertRoomsComponent, canActivate: [AuthGuard]},
-    { path: 'taverns/booking', component: bookAStayComponent, canActivate: [AuthGuard]},
-    { path: 'taverns/:room', component: editRoomsComponent, canActivate: [AuthGuard]},
+    { path: 'taverns', component: myTavernsComponent, canActivate: [AuthGuard]}, 
+    { path: 'taverns/insert-rooms', component: InsertRoomsComponent},
+    { path: 'taverns/booking', component: bookAStayComponent},
+    { path: 'taverns/rooms/:id', component: editRoomsComponent},
 ];
 
 
